@@ -1,0 +1,25 @@
+resource "azurerm_mysql_flexible_server" "mysql" {
+  name                   = "${var.project}-${var.environment}-mysql-tama-111-258-v3"
+  resource_group_name    = azurerm_resource_group.rg.name
+  location               = "southeastasia"
+  sku_name               = "B_Standard_B1ms"
+  administrator_login    = var.mysql_username
+  administrator_password = var.mysql_password
+  version                = "8.0.21"
+
+  lifecycle {
+    ignore_changes = [
+      administrator_login,
+      administrator_password,
+      zone
+    ]
+  }
+}
+
+resource "azurerm_mysql_flexible_server_firewall_rule" "mysql" {
+  name                = "AllowAllAzureService"
+  resource_group_name = azurerm_resource_group.rg.name
+  server_name         = azurerm_mysql_flexible_server.mysql.name
+  start_ip_address    = "0.0.0.0"
+  end_ip_address      = "0.0.0.0"
+}
