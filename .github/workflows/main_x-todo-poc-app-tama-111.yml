@@ -24,16 +24,16 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v2
         with:
-          registry: xtodopocacrtama111258.azurecr.io/
-          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_CB95BC2DD7FC4427A85CA991E0691E34 }}
-          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_1FD564D85E084BCA9FA9033DD9099970 }}
+          registry: https://${{ secrets.ContainerRegistory_ServerName }}/
+          username: ${{ secrets.ContainerRegistory_UserName }}
+          password: ${{ secrets.ContainerRegistory_Password }}
 
       - name: Build and push container image to registry
         uses: docker/build-push-action@v3
         with:
           context: ./app
           push: true
-          tags: xtodopocacrtama111258.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_CB95BC2DD7FC4427A85CA991E0691E34 }}/webapp:${{ github.sha }}
+          tags: https://${{ secrets.ContainerRegistory_ServerName }}/${{ secrets.ContainerRegistory_UserName }}/webapp:${{ github.sha }}
           file: ./app/Dockerfile
 
   deploy:
@@ -59,5 +59,5 @@ jobs:
         with:
           app-name: 'x-todo-poc-app-tama-111'
           slot-name: 'Production'
-          images: 'xtodopocacrtama111258.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_CB95BC2DD7FC4427A85CA991E0691E34 }}/webapp:${{ github.sha }}'
+          images: 'https://${{ secrets.ContainerRegistory_ServerName }}/${{ secrets.ContainerRegistory_UserName }}/webapp:${{ github.sha }}'
           
