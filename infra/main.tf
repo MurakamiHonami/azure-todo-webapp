@@ -41,3 +41,9 @@ variable "mysql_database" {
   type = string
 }
 
+#rg
+
+resource "azurerm_resource_group" "rg" {
+  name = "${var.project}-${var.environment}-rg"
+  location = "Japan East"
+}
