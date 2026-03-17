@@ -33,7 +33,7 @@ jobs:
         with:
           context: ./app
           push: true
-          tags: https://${{ secrets.ContainerRegistory_ServerName }}/${{ secrets.ContainerRegistory_UserName }}/webapp:${{ github.sha }}
+          tags: ${{ secrets.ContainerRegistory_ServerName }}/${{ secrets.ContainerRegistory_UserName }}/webapp:${{ github.sha }}
           file: ./app/Dockerfile
 
   deploy:
