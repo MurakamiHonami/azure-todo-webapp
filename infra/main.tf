@@ -10,7 +10,11 @@ terraform {
 provider "azurerm" {
   resource_provider_registrations = "none"
   subscription_id                 = var.subscription_id
-  features {}
+  features {
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
+  }
 }
 
 #変数
@@ -44,6 +48,6 @@ variable "mysql_database" {
 #rg
 
 resource "azurerm_resource_group" "rg" {
-  name = "${var.project}-${var.environment}-rg"
-  location = "Japan East"
+  name     = "${var.project}-${var.environment}-rg"
+  location = "Japan West"
 }
