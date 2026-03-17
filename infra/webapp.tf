@@ -21,9 +21,9 @@ resource "azurerm_linux_web_app" "app" {
     }
   }
   app_settings = {
-    "MYSQL_HOST"     = "host"
+    "MYSQL_HOST"     = azurerm_mysql_flexible_server.mysql.fqdn
     "MYSQL_PORT"     = "3306"
-    "MYSQL_USERNAME" = var.mysql_username
+    "MYSQL_USER"     = var.mysql_username
     "MYSQL_PASSWORD" = var.mysql_password
     "MYSQL_DATABASE" = var.mysql_database
     "MYSQL_SSL"      = "true"

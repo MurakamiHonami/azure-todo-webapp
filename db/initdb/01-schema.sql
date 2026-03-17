@@ -1,4 +1,3 @@
-USE todo;
 SET CHARSET UTF8;
 
 DROP TABLE IF EXISTS TaskMetaInfo;
